@@ -1,0 +1,13 @@
+body {
+    background: $bg-body;
+    font-size: calc(100vw * 0.0054 + 13px);
+    @include media('>widescreen') {
+        font-size: 20px;
+    }
+}
+.container {
+    max-width: 1210px;
+    margin: 0 auto;
+    padding: 30px 15px;
+    background: $bg-container;
+}
