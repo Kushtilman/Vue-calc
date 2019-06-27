@@ -3,8 +3,8 @@
 		input(
 			type="radio"
 			name="radio-btn"
-			:checked="value"
-			@input="toggleSwitch($event)"
+			:value="timeCalc"
+			v-model="radioButtonValue"
 			)
 		svg(width='20px', height='20px', viewBox='0 0 20 20')
 			circle(cx='10', cy='10', r='9')
@@ -18,16 +18,18 @@
     export default {
         name: 'TheRadioButton',
         props: {
-            value: Boolean
+            value: [Boolean, String, Number],
+            timeCalc: Number
         },
-        data () {
-            return {
-
-            }
-        },
-        methods: {
-            toggleSwitch(i) {
-                this.$emit('input', i.target.checked)
+        computed: {
+            radioButtonValue: {
+                get: function() {
+                    return this.value
+                },
+                set: function() {
+                    // Communicate the change to parent component so that selectedValue can be updated
+                    this.$emit("input", this.timeCalc)
+                }
             }
         }
     }

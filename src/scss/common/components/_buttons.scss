@@ -43,3 +43,13 @@
         transition: color .3s;
     }
 }
+
+.print {
+    background: none;
+    border: none;
+    padding: 0 0 0 15px;
+    transition: color .3s;
+    &:focus {
+        outline: none;
+    }
+}

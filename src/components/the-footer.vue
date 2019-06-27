@@ -1,14 +1,18 @@
 <template lang="pug">
-	footer.footer
+	footer.footer.hidden-print
 		.container
 			p Here can be your advertising
-			ul.function-list
-				li.function-item(
-					v-for="sending in sendings"
-					:key="sending.id"
-					)
-					a.function-link(:href="`${sending.href}`")
-						span(:class="`i ${sending.icon}`") {{ sending.name }}
+			.messengers
+				ul.function-list
+					li.function-item(
+						v-for="sending in sendings"
+						:key="sending.id"
+						)
+						a.function-link(:href="`${sending.href}`")
+							span(:class="`i ${sending.icon}`") {{ sending.name }}
+				button.print(
+					@click="print"
+					) Print
 </template>
 
 <script>
@@ -20,8 +24,12 @@
 					{ icon: 'i-skype', 			href: 'skype:username?call',			name: '' },
                     { icon: 'i-telegram', 		href: 'tg://resolve?domain=<USERNAME>', name: '' },
                     { icon: 'i-mail-dot-ru', 	href: 'mailto:me@gmail.com',			name: '' },
-                    { icon: 'print', 			href: '#',								name: 'print' }
 				]
+            }
+        },
+        methods: {
+            print() {
+                return print()
             }
         }
     }
@@ -55,6 +63,7 @@
 
 	.function-item {
 		padding-left: 15px;
+		line-height: 0;
 	}
 
 	.function-link {
@@ -90,5 +99,10 @@
 		&:hover {
 			color: $white;
 		}
+	}
+
+	.messengers {
+		display: flex;
+		align-items: center;
 	}
 </style>

@@ -5,17 +5,11 @@
 				.layout-options
 					.heading
 						h2.h3 JS options:
-
-
-
-						button.reset(
+						button.reset.hidden-print(
 							type="reset"
 							value="reset"
 							@click="resetFields"
 							) Res.
-
-
-
 					ul.list.options-list
 						li.options-item(
 							v-for="(option, i) in optionsJS"
@@ -50,25 +44,14 @@
 				.components.type
 					.heading
 						h2.h3 Layout Type:
-
-
-
-
-
-
 					ul.list.types-list
 						li.types-item(
 							v-for="type in layoutTypes"
 							)
 							the-radio-button(
-								v-model="type.status"
+								v-model="layoutType"
+								:time-calc="type.hour"
 								) {{ type.name }}
-
-
-
-
-
-
 				.components.requirements
 					.heading
 						h2.h3 Layout Requirements:
@@ -132,62 +115,67 @@
         },
         data () {
             return {
+                layoutType: 0,
+                jsOption: [],
+                layoutReq: [],
+
+
+
                 isActive: true,
                 amountOfPages: '',
                 uniqueElements: '',
                 notes: '',
                 extraHours: '',
-                resetValue: '',
 
                 optionsJS: [
-                    { name: 'Carousel', 							hour: '2', 		status: false},
-                    { name: 'Tabs', 								hour: '1', 		status: false},
-                    { name: 'Accordion', 							hour: '3', 		status: false },
-                    { name: 'Open Close',							hour: '2.1', 	status: false },
-                    { name: 'Lightbox', 							hour: '1.5', 	status: false },
-                    { name: 'Popup', 								hour: '.5', 	status: false },
-                    { name: 'Tooltip', 								hour: '.8', 	status: false },
-                    { name: 'Slider', 								hour: '2', 		status: false },
-                    { name: 'Custom forms', 						hour: '2', 		status: false },
-                    { name: 'Custom scroll', 						hour: '2', 		status: false },
-                    { name: 'Animated sorting / Filter', 			hour: '2', 		status: false },
-                    { name: 'Calendar / Datepicker', 				hour: '4', 		status: false },
-                    { name: 'Form validation', 						hour: '1', 		status: false },
-                    { name: 'Anchor navigation with smooth scroll', hour: '2', 		status: false },
-                    { name: 'Masonry', 								hour: '2', 		status: false },
-                    { name: 'Custom video player', 					hour: '2', 		status: false },
-                    { name: 'Custom audio player', 					hour: '2', 		status: false },
-                    { name: 'Background video', 					hour: '2', 		status: false },
-                    { name: 'Parallax on background',				hour: '2', 		status: false },
-                    { name: 'AJAX load more / Infinite scroll', 	hour: '2', 		status: false },
-                    { name: 'Grid / List view switcher', 			hour: '2', 		status: false },
-                    { name: 'Animation on scroll', 					hour: '2', 		status: false },
-                    { name: 'Autocomplete', 						hour: '2', 		status: false },
-                    { name: 'Preloader', 							hour: '2', 		status: false },
+                    { name: 'Carousel', 							hour: 2, 		status: false},
+                    { name: 'Tabs', 								hour: 1, 		status: false},
+                    { name: 'Accordion', 							hour: 3, 		status: false },
+                    { name: 'Open Close',							hour: 21, 	status: false },
+                    { name: 'Lightbox', 							hour: 15, 	status: false },
+                    { name: 'Popup', 								hour: 0.3, 	status: false },
+                    { name: 'Tooltip', 								hour: 3, 	status: false },
+                    { name: 'Slider', 								hour: 2, 		status: false },
+                    { name: 'Custom forms', 						hour: 2, 		status: false },
+                    { name: 'Custom scroll', 						hour: 2, 		status: false },
+                    { name: 'Animated sorting / Filter', 			hour: 2, 		status: false },
+                    { name: 'Calendar / Datepicker', 				hour: 4, 		status: false },
+                    { name: 'Form validation', 						hour: 1, 		status: false },
+                    { name: 'Anchor navigation with smooth scroll', hour: 2, 		status: false },
+                    { name: 'Masonry', 								hour: 2, 		status: false },
+                    { name: 'Custom video player', 					hour: 2, 		status: false },
+                    { name: 'Custom audio player', 					hour: 2, 		status: false },
+                    { name: 'Background video', 					hour: 2, 		status: false },
+                    { name: 'Parallax on background',				hour: 2, 		status: false },
+                    { name: 'AJAX load more / Infinite scroll', 	hour: 2, 		status: false },
+                    { name: 'Grid / List view switcher', 			hour: 2, 		status: false },
+                    { name: 'Animation on scroll', 					hour: 2, 		status: false },
+                    { name: 'Autocomplete', 						hour: 2, 		status: false },
+                    { name: 'Preloader', 							hour: 2, 		status: false },
                 ],
                 layoutTypes: [
-                    { name: 'Fixed / Flexible layout', 		hour: '2', status: false },
-                    { name: 'Responsive at our discretion', hour: '3', status: false },
-                    { name: '+ 1 Responsive Design', 		hour: '4', status: false },
-                    { name: '+ 2 Responsive Designs', 		hour: '5', status: false },
-                    { name: '+ 3 Responsive Designs', 		hour: '6', status: false },
-                    { name: '+ 4 Responsive Designs', 		hour: '7', status: false }
+                    { name: 'Fixed / Flexible layout', 		hour: 2, status: false },
+                    { name: 'Responsive at our discretion', hour: 3, status: false },
+                    { name: '+ 1 Responsive Design', 		hour: 4, status: false },
+                    { name: '+ 2 Responsive Designs', 		hour: 5, status: false },
+                    { name: '+ 3 Responsive Designs', 		hour: 6, status: false },
+                    { name: '+ 4 Responsive Designs', 		hour: 7, status: false }
                 ],
                 requirements: [
-					{ name: 'Fonts (TypeKit, Fonts.com)', 	hour: '2', status: false },
-                    { name: 'Footer at Bottom', 			hour: '2', status: false },
-                    { name: 'Commented HTML/CSS', 			hour: '2', status: false },
-                    { name: 'SSI Templates', 				hour: '2', status: false },
-                    { name: 'WooCommerce WP minimum', 		hour: '2', status: false },
-                    { name: 'WooCommerce WP medium', 		hour: '2', status: false },
-                    { name: 'Markup for WordPress', 		hour: '2', status: false },
-                    { name: 'Favicon', 						hour: '2', status: false },
-                    { name: 'Retina', 						hour: '2', status: false },
-                    { name: 'Twitter Bootstrap', 			hour: '2', status: false },
-                    { name: 'Foundation Zurb', 				hour: '2', status: false },
-                    { name: 'Materialize',					hour: '2', status: false },
-                    { name: 'Print version CSS', 			hour: '2', status: false },
-                    { name: 'Resizable Fonts', 				hour: '2', status: false }
+					{ name: 'Fonts (TypeKit, Fonts.com)', 	hour: 2, status: false },
+                    { name: 'Footer at Bottom', 			hour: 2, status: false },
+                    { name: 'Commented HTML/CSS', 			hour: 2, status: false },
+                    { name: 'SSI Templates', 				hour: 2, status: false },
+                    { name: 'WooCommerce WP minimum', 		hour: 2, status: false },
+                    { name: 'WooCommerce WP medium', 		hour: 2, status: false },
+                    { name: 'Markup for WordPress', 		hour: 2, status: false },
+                    { name: 'Favicon', 						hour: 2, status: false },
+                    { name: 'Retina', 						hour: 2, status: false },
+                    { name: 'Twitter Bootstrap', 			hour: 2, status: false },
+                    { name: 'Foundation Zurb', 				hour: 2, status: false },
+                    { name: 'Materialize',					hour: 2, status: false },
+                    { name: 'Print version CSS', 			hour: 2, status: false },
+                    { name: 'Resizable Fonts', 				hour: 2, status: false }
 				]
             }
         },
@@ -224,19 +212,10 @@
                 });
                 return summ
             },
-            layoutTypesResult() {
-                let summ = 0;
-                this.layoutTypes.forEach((el)=> {
-                    if(el.status) {
-                        console.log(summ = +el.hour);
-                    }
-                });
-                return summ
-            },
 			summary() {
                 return 	this.optionsJsResult +
 						this.requirementsResult +
-						this.layoutTypesResult +
+						this.layoutType +
 						this.uniqueElements*.5 +
 						this.extraHours*1 +
 						this.amountOfPages*1

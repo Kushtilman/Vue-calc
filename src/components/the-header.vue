@@ -1,8 +1,8 @@
 <template lang="pug">
-	header.header
+	header.header.hidden-print
 		.container
 			.logo
-				a(href="#")
+				a(href="https://www.ssa.group/")
 					img(src="../assets/logo.png" alt="SSA Group")
 			ul.navbar
 				button.navbar-item(
@@ -28,7 +28,8 @@
 						)
 						span.i.i-cross
 					.text-holder
-						h2.h2 Правила и принципы поэлементной оценки markup duration проекта
+						h1.h2 Много текста о том как этим пользоваться, примеры...
+						h2.h3 Правила и принципы поэлементной оценки markup duration проекта
 						p Данный подход к оцениванию трудозатрат на проект (duration) основывается на том, что больше всего времени разработчик тратит на порезку и стилизацию элементов дизайна.
 						p Основная цель данного подхода, это дать компании инструмент, с помощью которого можно обеспечить прозрачность и понятность оценки для проекта любой специфики и сложности.
 						h3.h3 Процесс оценивания
@@ -140,7 +141,11 @@
 
 	.navbar {
 		display: flex;
+		flex-direction: column;
 		padding-left: 0;
+		@include media('>skyline-phone') {
+			flex-direction: row;
+		}
 	}
 
 	.navbar-item {
@@ -154,6 +159,12 @@
 		align-items: center;
 		&:hover {
 			color: $white;
+		}
+		&:nth-child(1) {
+			margin-bottom: 10px;
+			@include media('>skyline-phone') {
+				margin-bottom: 0;
+			}
 		}
 	}
 

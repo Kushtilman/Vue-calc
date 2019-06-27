@@ -22,6 +22,7 @@ $media-expressions: (
 @import 'base/variables';
 @import 'base/include-media';
 @import 'base/mixins';
+@import 'base/print';
 
 @import 'common/normalize';
 @import 'common/typography';
